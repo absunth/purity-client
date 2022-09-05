@@ -672,7 +672,7 @@ public abstract class Entity {
 	}
 
 	public void applyEntityCollision(Entity entity1) {
-		if(entity1.riddenByEntity != this && entity1.ridingEntity != this) {
+		if(entity1.riddenByEntity != this && entity1.ridingEntity != this && !purity.no_knockback) {
 			double d2 = entity1.posX - this.posX;
 			double d4 = entity1.posZ - this.posZ;
 			double d6 = MathHelper.abs_max(d2, d4);
@@ -1066,7 +1066,8 @@ public abstract class Entity {
 		double d10 = d1 - (double)i7;
 		double d12 = d3 - (double)i8;
 		double d14 = d5 - (double)i9;
-		if(this.worldObj.isBlockNormalCube(i7, i8, i9)) {
+
+		if(this.worldObj.isBlockNormalCube(i7, i8, i9) && !purity.no_knockback) {
 			boolean z16 = !this.worldObj.isBlockNormalCube(i7 - 1, i8, i9);
 			boolean z17 = !this.worldObj.isBlockNormalCube(i7 + 1, i8, i9);
 			boolean z18 = !this.worldObj.isBlockNormalCube(i7, i8 - 1, i9);
