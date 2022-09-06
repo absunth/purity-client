@@ -411,9 +411,13 @@ public abstract class Entity {
 				}
 			}
 
-			this.posX = (this.boundingBox.minX + this.boundingBox.maxX) / 2.0D;
-			this.posY = this.boundingBox.minY + (double)this.yOffset - (double)this.ySize;
-			this.posZ = (this.boundingBox.minZ + this.boundingBox.maxZ) / 2.0D;
+			// credits to https://glass-repo.net/repo/mod/mpentityfix
+			if(!this.worldObj.multiplayerWorld || this instanceof EntityPlayer || !(this instanceof EntityLiving)) {
+				this.posX = (this.boundingBox.minX + this.boundingBox.maxX) / 2.0D;
+				this.posY = this.boundingBox.minY + (double)this.yOffset - (double)this.ySize;
+				this.posZ = (this.boundingBox.minZ + this.boundingBox.maxZ) / 2.0D;
+			}
+
 			this.isCollidedHorizontally = d11 != d1 || d15 != d5;
 			this.isCollidedVertically = d13 != d3;
 			this.onGround = d13 != d3 && d13 < 0.0D;
