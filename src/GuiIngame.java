@@ -185,9 +185,11 @@ public class GuiIngame extends Gui {
 		} else if(this.mc.inGameHasFocus) {
 			fontRenderer8.drawStringWithShadow("purity " + purity.version, 2, 2, 0xFFFFFF);
 			fontRenderer8.drawStringWithShadow("no knockback [u]", 2, 12, (purity.no_knockback ? 52224 : 0xFFFFFF));
-			fontRenderer8.drawStringWithShadow("no fall [n]", 2, 22, (purity.no_fall ? 52224 : 0xFFFFFF));
-			fontRenderer8.drawStringWithShadow("speed [x]", 2, 32, (purity.speed ? 52224 : 0xFFFFFF));
-			fontRenderer8.drawStringWithShadow("step [p]", 2, 42, (purity.step ? 52224 : 0xFFFFFF));
+			fontRenderer8.drawStringWithShadow("fast mine [l]", 2, 22, (purity.fast_mine ? 52224 : 0xFFFFFF));
+			fontRenderer8.drawStringWithShadow("no fall [n]", 2, 32, (purity.no_fall ? 52224 : 0xFFFFFF));
+			fontRenderer8.drawStringWithShadow("speed [x]", 2, 42, (purity.speed ? 52224 : 0xFFFFFF));
+			fontRenderer8.drawStringWithShadow("jesus [j]", 2, 52, (purity.jesus ? 52224 : 0xFFFFFF));
+			fontRenderer8.drawStringWithShadow("step [p]", 2, 62, (purity.step ? 52224 : 0xFFFFFF));
 		}
 
 		if(this.recordPlayingUpFor > 0) {

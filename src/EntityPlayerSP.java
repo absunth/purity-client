@@ -96,15 +96,18 @@ public class EntityPlayerSP extends EntityPlayer {
 		this.movementInput.checkKeyForMovementInput(i1, z2);
 		
 		if(!z2) {
-			if(i1 == Keyboard.KEY_N) {
+			if(i1 == Keyboard.KEY_N)
 				purity.no_fall = !purity.no_fall;
-			} else if(i1 == Keyboard.KEY_X){
+			else if(i1 == Keyboard.KEY_X)
 				purity.speed = !purity.speed;
-			} else if(i1 == Keyboard.KEY_U) {
+			else if(i1 == Keyboard.KEY_U)
 				purity.no_knockback = !purity.no_knockback;
-			} else if(i1 == Keyboard.KEY_P) {
+			else if(i1 == Keyboard.KEY_P)
 				purity.step = !purity.step;
-			}
+			else if(i1 == Keyboard.KEY_L)
+				purity.fast_mine = !purity.fast_mine;
+			else if(i1 == Keyboard.KEY_J)
+				purity.jesus = !purity.jesus;
 		}
 	}
 
