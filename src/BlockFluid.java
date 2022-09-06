@@ -1,5 +1,6 @@
 package net.minecraft.src;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 public abstract class BlockFluid extends Block {
@@ -68,9 +69,21 @@ public abstract class BlockFluid extends Block {
 		return material6 == this.blockMaterial ? false : (material6 == Material.ice ? false : (i5 == 1 ? true : super.shouldSideBeRendered(iBlockAccess1, i2, i3, i4, i5)));
 	}
 
+
+	public void getCollidingBoundingBoxesPlayer(World world1, int i2, int i3, int i4, AxisAlignedBB axisAlignedBB5, ArrayList arrayList6) {
+		AxisAlignedBB axisAlignedBB7 = this.getCollisionBoundingBoxFromPoolPlayer(world1, i2, i3, i4);
+		if(axisAlignedBB7 != null && axisAlignedBB5.intersectsWith(axisAlignedBB7)) {
+			arrayList6.add(axisAlignedBB7);
+		}
+
+	}
+
 	public AxisAlignedBB getCollisionBoundingBoxFromPool(World world1, int i2, int i3, int i4) {
+		return null;
+	}
+
+	public AxisAlignedBB getCollisionBoundingBoxFromPoolPlayer(World world1, int i2, int i3, int i4) {
 		return purity.jesus ? super.getCollisionBoundingBoxFromPool(world1, i2, i3, i4) : null;
-		//return null;
 	}
 
 	public int getRenderType() {
