@@ -5,4 +5,4 @@
 
 Simple and pure Minecraft client for b1.7.3
 ## How do I compile this?
-Just drag the source into [RetroMCP](https://github.com/MCPHackers/RetroMCP-Java)'s decompiled b1.7.3 output and recompile.
+Just ddrag the source into [RetroMCP](https://github.com/MCPHackers/RetroMCP-Java)'s decompiled b1.7.3 output and recompile.
