@@ -86,7 +86,7 @@ public class PlayerControllerMP extends PlayerController {
 					}
 
 					++this.field_9441_h;
-					if(this.curBlockDamageMP >= (purity.fast_mine ? 0.7F : 1.0F)) {
+					if(this.curBlockDamageMP >= (purity.fast_mine ? 0.75F : 1.0F)) {
 						this.isHittingBlock = false;
 						this.netClientHandler.addToSendQueue(new Packet14BlockDig(2, i1, i2, i3, i4));
 						this.sendBlockRemoved(i1, i2, i3, i4);
