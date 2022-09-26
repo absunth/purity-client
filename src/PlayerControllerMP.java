@@ -7,6 +7,7 @@ public class PlayerControllerMP extends PlayerController {
 	private int currentBlockY = -1;
 	private int currentblockZ = -1;
 	private boolean sendGhost = false;
+	private int ghostCounter = 0;
 	private int lastBlockX;
 	private int lastBlockY;
 	private int lastBlockZ;
@@ -45,8 +46,12 @@ public class PlayerControllerMP extends PlayerController {
 
 	public void clickBlock(int i1, int i2, int i3, int i4) {
 		if(this.sendGhost) {
-			this.sendGhost = false;
-			this.netClientHandler.addToSendQueue(new Packet14BlockDig(0, this.lastBlockX, this.lastBlockY, this.lastBlockZ, this.lastBlockW));
+			if (this.ghostCounter > 0) {
+				--this.ghostCounter;
+				this.netClientHandler.addToSendQueue(new Packet14BlockDig(0, this.lastBlockX, this.lastBlockY, this.lastBlockZ, this.lastBlockW));
+			} else {
+				this.sendGhost = false;
+			}
 		}
 
 		if(!this.isHittingBlock || i1 != this.currentBlockX || i2 != this.currentBlockY || i3 != this.currentblockZ) {
@@ -97,6 +102,9 @@ public class PlayerControllerMP extends PlayerController {
 
 					++this.field_9441_h;
 					if(this.curBlockDamageMP >= (purity.fast_mine ? 0.75F : 1.0F)) {
+						if(this.sendGhost)
+							this.netClientHandler.addToSendQueue(new Packet14BlockDig(0, this.lastBlockX, this.lastBlockY, this.lastBlockZ, this.lastBlockW));
+
 						this.isHittingBlock = false;
 						this.netClientHandler.addToSendQueue(new Packet14BlockDig(2, i1, i2, i3, i4));
 						this.sendBlockRemoved(i1, i2, i3, i4);
@@ -109,6 +117,7 @@ public class PlayerControllerMP extends PlayerController {
 						this.lastBlockY = i2;
 						this.lastBlockZ = i3;
 						this.lastBlockW = i4;
+						this.ghostCounter = 5;
 						this.sendGhost = true;
 					}
 				} else {
