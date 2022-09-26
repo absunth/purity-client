@@ -6,6 +6,11 @@ public class PlayerControllerMP extends PlayerController {
 	private int currentBlockX = -1;
 	private int currentBlockY = -1;
 	private int currentblockZ = -1;
+	private boolean sendGhost = false;
+	private int lastBlockX;
+	private int lastBlockY;
+	private int lastBlockZ;
+	private int lastBlockW;
 	private float curBlockDamageMP = 0.0F;
 	private float prevBlockDamageMP = 0.0F;
 	private float field_9441_h = 0.0F;
@@ -39,6 +44,11 @@ public class PlayerControllerMP extends PlayerController {
 	}
 
 	public void clickBlock(int i1, int i2, int i3, int i4) {
+		if(this.sendGhost) {
+			this.sendGhost = false;
+			this.netClientHandler.addToSendQueue(new Packet14BlockDig(0, this.lastBlockX, this.lastBlockY, this.lastBlockZ, this.lastBlockW));
+		}
+
 		if(!this.isHittingBlock || i1 != this.currentBlockX || i2 != this.currentBlockY || i3 != this.currentblockZ) {
 			this.netClientHandler.addToSendQueue(new Packet14BlockDig(0, i1, i2, i3, i4));
 			int i5 = this.mc.theWorld.getBlockId(i1, i2, i3);
@@ -94,6 +104,12 @@ public class PlayerControllerMP extends PlayerController {
 						this.prevBlockDamageMP = 0.0F;
 						this.field_9441_h = 0.0F;
 						this.blockHitDelay = (purity.fast_mine ? 0 : 5);
+
+						this.lastBlockX = i1;
+						this.lastBlockY = i2;
+						this.lastBlockZ = i3;
+						this.lastBlockW = i4;
+						this.sendGhost = true;
 					}
 				} else {
 					this.clickBlock(i1, i2, i3, i4);
